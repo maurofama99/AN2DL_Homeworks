@@ -111,7 +111,6 @@ def create_model(input_shape):
 model = create_model(input_shape = inputshape)
 model.summary()
 
-tfk.utils.plot_model(model)
 
 """#  Splitting the dataset
 
