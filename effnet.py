@@ -42,16 +42,12 @@ from keras import layers
 
 from keras.applications import EfficientNetB0
 
-!pip install alexnet_pytorch
-
 tfk = tf.keras
 tfkl = tf.keras.layers
 print(tf.__version__)
 
 
 # Download and import visualkeras library
-!pip install visualkeras
-import visualkeras
 
 # Random seed for reproducibility
 seed = 42
