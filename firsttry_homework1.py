@@ -118,8 +118,6 @@ Before splitting the dataset let's analyze it
 """
 
 # Commented out IPython magic to ensure Python compatibility.
-from google.colab import drive
-drive.mount('/gdrive')
 # %cd /gdrive/My Drive
 
 data_dir="training_data_final"
