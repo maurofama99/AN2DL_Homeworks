@@ -50,7 +50,6 @@ print(tf.__version__)
 
 
 # Download and import visualkeras library
-!pip install visualkeras
 import visualkeras
 
 # Random seed for reproducibility
@@ -185,20 +184,6 @@ valid_gen = data_gen.flow_from_directory(directory=training_dir,
                                                shuffle=True,
                                                seed=seed,
                                                subset="validation")
-
-train_gen.reset()
-finalarray = np.array([[0, 0, 0, 0, 0, 0, 0, 0]])
-for batch in range(0, train_gen.__len__(), 1):
-  tmpsum = np.sum([train_gen.next()[1]], axis=1)
-  #print(tmpsum.shape)
-  #print(finalarray.shape)
-  finalarray = np.concatenate((tmpsum,finalarray), axis=0)
-  #print(tmpsum)
-  finalarray = np.sum([finalarray], axis=1)
-  
-print(finalarray)
-
-print("total images (augmented) = ", np.sum(finalarray))
 
 from datetime import datetime
 
