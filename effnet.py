@@ -66,8 +66,7 @@ NUM_CLASSES = 8
 batch_size = 64
 size = (IMG_SIZE, IMG_SIZE)
 
-from google.colab import drive
-drive.mount('/gdrive')
+
 # %cd /gdrive/My Drive
 
 training_dir = "training_data_final"
