@@ -45,11 +45,6 @@ tfk = tf.keras
 tfkl = tf.keras.layers
 print(tf.__version__)
 
-
-# Download and import visualkeras library
-!pip install visualkeras
-import visualkeras
-
 # Random seed for reproducibility
 seed = 42
 
@@ -107,9 +102,7 @@ model.summary()
 
 """#  Splitting the dataset and Data augmentation"""
 
-# Commented out IPython magic to ensure Python compatibility.
-from google.colab import drive
-drive.mount('/gdrive')
+# Commented out IPython magic to ensure Python compatibility
 # %cd /gdrive/My Drive
 
 data_dir="training_data_final"
