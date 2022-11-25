@@ -30,15 +30,20 @@
 \newtheorem{lem}{Lemma}
 \newtheorem{cor}{Corollary}
 
-
-\title{AN2DL First Homework}
-\author{Mauro Famà,   Sofia Martellozzo,   Lorenzo Mondo\\
-        Group cANNoli}
+\font\arial=cmr12 at 40pt
+\title{{\arial AN2DL First Homework}}
+\font\calibri=cmr12 at 20pt
+\author{{\calibri Mauro Famà,   Sofia Martellozzo,   Lorenzo Mondo\\ \\
+        Group cANNoli}}
 \date{Academic Year 2022-2023}
 
 \begin{document}
 
 \maketitle
+\begin{center}
+    \includegraphics[scale=0.43]{images/title.png}
+\end{center}
+\newpage
 \vspace{.25in}
 
 %---------------------------------------%
@@ -57,13 +62,15 @@ A CNN is translation invariant but not rotation invariant[1]. The plants, howeve
 %---------------------------------------%
 \section*{Development Models}
 \subsection{From Scratch}
-We decided to build a model from scratch, by following the best practices currently provided by the State of the Art. In the baseline study we considered[1],  a convolutional neural network is designed to determine the species of seedlings. 
+We decided to build a model from scratch, by following the best practices currently provided by the State of the Art. In the baseline study we considered[1],  a convolutional neural network is desired to determine the species of seedlings. 
 The model presented in the study, in order to find the correct number of layers, takes into account two properties: the filter capacity and coverage of the network[2]. \\
-The filter capacity is a measure of how well a filter is able to detect complex structures in images. The cpacity of each convolutional layer should be larger than a minimum value t. It is empirically found t = 1/6 is a good lower bound of capacity value for all convolutional layers in various tasks.
+The filter capacity is a measure of how well a filter is able to detect complex structures in images. The capacity of each convolutional layer should be larger than a minimum value t. It is empirically found t = 1/6 is a good lower bound of capacity value for all convolutional layers in various tasks.
 We built our model by following the methods explained in the paper, so this parameter is respected implicitly by construction. \\
 The coverage for a layer in a convolutional neural network is a measure of how big a part of the input image the layer can “see”. 
 The receptive field size of the topmost convolutional layer should be no larger than the image size. Our dataset is composed of smaller images with respect to the dataset used in the study (96x96 instead of 128x128), but the coverage of our topmost convolutional layer is 0.91, respecting the constraint of being less than the whole input picture. \\
-In total, the network had 729.864 learnable parameters, which is rather small compared to millions of parameters of the most famous pre-trained networks. Differently from the study, we initialized our weights with the uniform variance scaling initializer instead of the ImageNet weights, so the training phase required more epochs than the baseline study. We trained our model for 210 epochs, reducing the learning rate every 70 epochs. Even if the model was designed for plants classification, it had an accuracy of only 66,26\%. The big difference between the bigger, higher quality dataset used for training in the study and the dataset provided for the homework leads to a big difference also in the results.
+In total, the network had 729.864 learnable parameters, which is rather small compared to millions of parameters of the most famous pre-trained networks. Differently from the study, we initialized our weights with the uniform variance scaling initializer instead of the ImageNet weights, so the training phase required more epochs than the baseline study. We trained our model for 210 epochs, reducing the learning rate every 70 epochs. Even if the model was designed for plant classification, it had an accuracy of only 66,26\%.
+
+%\includegraphics[scale=0.43]{images/soamodel.png}
 
 %---------------------------------------%
 \section*{Final Model}
