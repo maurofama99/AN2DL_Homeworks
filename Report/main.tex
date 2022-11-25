@@ -1,4 +1,5 @@
-\documentclass[10pt, oneside]{article} 
+\documentclass[11pt, oneside]{article} 
+\usepackage{mathptmx}
 \usepackage{amsmath, amsthm, amssymb, calrsfs, wasysym, verbatim, bbm, color, graphics, geometry}
 \usepackage{graphicx}
 \usepackage{float}
@@ -48,9 +49,9 @@
 
 %---------------------------------------%
 
-\section*{Introduction}
+\section{Introduction}
 %---------------------------------------%
-\section*{Our approaches}
+\section{Our approaches}
 \subsection{Data Augmentation}
 It is common knowledge that the more data
 an ML algorithm has access to, the more effective it can be[0]. Even when the data is of lower quality, algorithms can actually perform better, as long as useful data can be extracted by the model from the original data set.\\
@@ -60,7 +61,7 @@ A CNN is translation invariant but not rotation invariant[1]. The plants, howeve
 \subsection{Fine Tuning}
 \subsection{Transfer Learning}
 %---------------------------------------%
-\section*{Development Models}
+\section{Development Models}
 \subsection{From Scratch}
 We decided to build a model from scratch, by following the best practices currently provided by the State of the Art. In the baseline study we considered[1],  a convolutional neural network is desired to determine the species of seedlings. 
 The model presented in the study, in order to find the correct number of layers, takes into account two properties: the filter capacity and coverage of the network[2]. \\
@@ -69,15 +70,19 @@ We built our model by following the methods explained in the paper, so this para
 The coverage for a layer in a convolutional neural network is a measure of how big a part of the input image the layer can “see”. 
 The receptive field size of the topmost convolutional layer should be no larger than the image size. Our dataset is composed of smaller images with respect to the dataset used in the study (96x96 instead of 128x128), but the coverage of our topmost convolutional layer is 0.91, respecting the constraint of being less than the whole input picture. \\
 In total, the network had 729.864 learnable parameters, which is rather small compared to millions of parameters of the most famous pre-trained networks. Differently from the study, we initialized our weights with the uniform variance scaling initializer instead of the ImageNet weights, so the training phase required more epochs than the baseline study. We trained our model for 210 epochs, reducing the learning rate every 70 epochs. Even if the model was designed for plant classification, it had an accuracy of only 66,26\%.
+\subsection{AlexNet}
+\subsection{VGG}
+\subsection{Xception}
 
 %\includegraphics[scale=0.43]{images/soamodel.png}
 
 %---------------------------------------%
-\section*{Final Model}
+\section{Final Model}
+ensemble model finale
 %---------------------------------------%
-\section*{Errors and lesson learned}
+\section{Errors and lesson learned}
 %---------------------------------------%
-\section*{Possible improvements}
+\section{Possible improvements}
 %---------------------------------------%
 \section*{References}
 [0] Perez, L., \& Wang, J. (2017). The Effectiveness of Data Augmentation in Image Classification using Deep Learning. arXiv. https://doi.org/10.48550/arXiv.1712.04621\\
