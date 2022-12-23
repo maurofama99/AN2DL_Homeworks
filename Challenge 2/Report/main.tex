@@ -50,25 +50,54 @@
 %---------------------------------------%
 
 \section{Introduction}
+This report describes a multivariate time series classification project in which several artificial neural network models were used. Specifically, we conducted training using LSTM (Long Short-Term Memory), BiLSTM (Bidirectional Long Short-Term Memory), and 1D Convolutional Neural Networks (CNNs). The results obtained were compared and analyzed to identify the most performant model for this type of problem. We also explored the impact of different model configurations on their performance.
+
+The dataset used for this project consists of multivariate time series with 6 variables and a total of 12 classes: "Wish," "Another," "Comfortably," "Money," "Breathe," "Time," "Brain," "Echoes," "Wearing," "Sorrow," "Hey," and "Shine." The class with the most samples is "Sorrow" with 777 samples, while the class with the fewest samples is "Wish" with 34 samples. The dataset is heavily imbalanced, with some classes being much more common than others. In some experiments, we used data augmentation techniques to augment the time series and to balance the dataset with oversampling.
+
+Prior to analysis, in some experiments, the time series were pre-processed to remove missing values and standardize the data. This report provides an overview of the techniques used and a detailed description of the results obtained. In addition, some concluding thoughts are presented on the advantages and disadvantages of the different models and on the factors that influence their performance.
 
 %---------------------------------------%
 \section{Techniques}
 \subsection{Data Augmentation}
 
-
+\subsection{Pre-processing}
+Normalization and standardization are two techniques used to prepare data for analysis. Both techniques are used to standardize the values of variables in order to make them comparable to each other, but they differ in how they are performed.
+\subsubsection{Normalization}
+Normalization consists of transforming the values of each variable into a specific range, usually between 0 and 1. One way to perform normalization is through min-max normalization, which scales the values of each variable between a minimum and maximum value. The formula for min-max normalization is as follows:
+\[ x_{norm} = \frac{x - x_{min}}{x_{max} - x_{min}} \]\
+where x is the value to be normalized, $x_{min}$ is the minimum value of the variable, $x_{max}$ is the maximum value of the variable, and $x_{norm}$ is the normalized value.
+Normalization is often used when it is important to maintain the original range of values or when you want to avoid privileging some variables over others.
+\subsubsection{Standardization}
+Standardization, on the other hand, consists of transforming the values of each variable into a standard scale, where the mean is 0 and the standard deviation is 1. Standardization is performed using the following formula:
+\[x_{std} = \frac{x - \mu}{\sigma} \]
+where x is the value to be standardized, $\mu$ is the mean of the variable, $\sigma$ is the standard deviation of the variable, and $x_{std}$ is the standardized value.
+Standardization is often used when it is important to standardize values on a standard scale or when you want to avoid variables with high values from having too much influence on the analysis.\\\\
+In our case, model training performed better using standardization instead of normalization for several reasons. First, standardization is more suited to our data as the values of the variables have a normal distribution. In addition, standardization allows us to avoid privileging some variables over others, as all variables are standardized on the same scale. Finally, standardization enables us to use all the information available in our data, as normalization does not limit variables' values to a specific range.
 
 %---------------------------------------%
 \section{Development Models}
-
+In our experiments, we split the dataset into train and validation sets using an 80/20 split, maintaining the proportion of time series for each class in both sets. We used the train set to train the models and the validation set to evaluate their performance.\\
+In some cases, we trained the models without any preprocessing of the data. In other cases, we applied pre-processing techniques such as normalization or standardization to the data before training the models. In some cases, we also used data augmentation techniques to generate additional time series data to train the models.
+\subsection{LSTM (Long Short-Term Memory)}
+LSTM is a type of artificial neural network that is particularly well-suited for processing sequential data. LSTMs are composed of cells that contain both input and output gates, as well as a cell state that can store information over long periods of time. The input and output gates control the flow of information into and out of the cell, while the cell state allows the LSTM to retain important information for long periods of time. When processing sequential data, LSTMs can use their cell state to remember relevant information from earlier in the sequence and use that information to make predictions about future events. This makes LSTMs particularly useful for tasks like multivariate time series classification, where long-term dependencies between elements in the time series are important.
+\subsection{BiLSTM (Bidirectional Long Short-Term Memory)}
+BiLSTM is a variant of LSTM that processes sequential data in both forward and backward directions. This allows BiLSTM to capture dependencies between elements in the sequence both forwards and backward, which can be especially useful for tasks like multivariate time series classification where both long-term and short-term dependencies are important. In a BiLSTM model, the input data is processed by two separate LSTM networks, one that processes the data from the beginning to the end of the sequence and one that processes the data from the end to the beginning. The outputs of these two networks are then combined to produce a final prediction or classification.
+\subsection{1D Convolutional Neural Networks (CNNs)}
+1D Convolutional Neural Networks are a type of artificial neural network that is particularly effective at extracting features from sequential data. CNNs use convolutional filters to learn patterns in the data and use those patterns to make predictions or decisions. In a 1D CNN, the filters are applied to the input data along the time dimension, allowing the model to learn temporal patterns in the data. This makes 1D CNNs well-suited for tasks like multivariate time series classification, where the relationships between different time series are important for making accurate predictions.
 %---------------------------------------%
 \section{Final Model}
-
+The network uses 1D convolutional layers to extract features from the time series and then uses batch normalization layers and ReLU activation layers to improve the model's performance.\\
+The network consists of three blocks, each of which consists of three Conv1D layers and a batch normalization layer. Each block also uses a shortcut layer which adds the input of the block to the output of the third Conv1D layer of the block. This allows the network to "skip" directly to the output of the block without going through all of its intermediate layers, which can help reduce the risk of the model's accuracy degrading due to excessive expansion of its depth.\\
+Finally, the network uses a 1D global pooling layer to reduce the size of the extracted features and a densely connected layer to perform the time series classification.
 %---------------------------------------%
 \section{Conclusions}
 
 %---------------------------------------%
 \section*{References}
-[0] 
-{[1]} 
-{[2]}
+[0] \href{https://doi.org/10.48550/arXiv.1712.04621}{Perez, L., \& Wang, J. (2017). The Effectiveness of Data Augmentation in Image Classification using Deep Learning. arXiv.}\\
+{[1]} \href{https://doi.org/10.1016/j.biosystemseng.2016.08.024}{Mads Dyrmann, Henrik Karstoft, Henrik Skov Midtiby, Plant species classification using deep convolutional neural network, Biosystems Engineering, Volume 151, 2016, Pages 72-80, ISSN 1537-5110} \\
+{[2]}\href{https://www.kaggle.com/blobs/download/forum-message-attachment-files/2287/A%20practical%20theory%20for%20designing%20very%20deep%20convolutional%20neural%20networks.pdf}{Cao, Xudong. "A practical theory for designing very deep convolutional neural networks." Unpublished Technical Report (2015)}\\
+{[3]} \href{https://proceedings.neurips.cc/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf}{Alex Krizhevsky, Ilya Sutskever, Geoffrey E. Hinton. ImageNet Classification with Deep Convolutional Neural Networks.} \\
+{[4]} \href{https://arxiv.org/pdf/1610.02357.pdf}{Chollet, F. (2016). Xception: Deep Learning with Depthwise Separable Convolutions. arXiv. }\\
+{[5]} \href{https://doi.org/10.1016/j.procs.2020.07.015}{Seungmin Han, Jongpil Jeong: An Weighted CNN Ensemble Model with Small Amount of Data for Bearing Fault Diagnosis, Procedia Computer Science, Volume 175, 2020, Pages 88-95, ISSN 1877-0509} \\
 \end{document}
