@@ -96,8 +96,7 @@ The 1D CNN model that we used in our experiments consists of a series of convolu
 \\
 We trained several configurations of the 1DCNN model, and the configuration that achieved the best performance in terms of accuracy (68.2\%) on the test set was trained using data augmentation techniques.
 %---------------------------------------%
-\section{Final Model}
-\subsection{ResNet}
+\section{Final Model - ResNet}
 The network uses 1D convolutional layers to extract features from the time series and then uses batch normalization layers and ReLU activation layers to improve the model's performance.\\
 The network consists of three blocks, each of which consists of three Conv1D layers and a batch normalization layer. Each block also uses a shortcut layer which adds the input of the block to the output of the third Conv1D layer of the block. This allows the network to "skip" directly to the output of the block without going through all of its intermediate layers, which can help reduce the risk of the model's accuracy degrading due to excessive expansion of its depth.\\
 Finally, the network uses a 1D global pooling layer to reduce the size of the extracted features and a densely connected layer to perform the time series classification.
